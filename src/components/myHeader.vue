@@ -4,12 +4,12 @@
          
         <nav class="d-flex justify-content-between align-items-center">
                 <div class="mylogo">
-                BOOLFLIX
+               <h1> BOOLFLIX</h1>
             </div>
             <div class="searchbar">
                 
                 <label for="searchbar"></label>
-                <input type="text" id="searchbar" placeholder="Cerca il tuo film">
+                <input type="text" id="searchbar" placeholder="Cerca il tuo film" v-model="query" >
 
             </div>
         </nav>
@@ -21,6 +21,18 @@
 
 <script>
 export default {
+    name: 'myHeader',
+    data() {
+        return {
+            query: "",
+        }
+    },
+    methods: {
+        searchbar() {
+            $emit('search', this.query);
+            this.query = "";    
+        }
+    } 
 
 }
 </script>
