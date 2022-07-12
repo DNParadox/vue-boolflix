@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+background-color: black;
+padding-inline: 2rem;
+height: 50px;
+    .mylogo{
+        color:red;
+    }
+
+}
+
+
+main {
+    padding-top: 1rem;
+    height: calc(100vh - 50px);
+    padding-inline: 2rem;
+    background-color: #434343;;
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+.column {
+    width: 90%;
+    padding-right: 2rem;
+    background-color: lightcoral;
+}
