@@ -27,11 +27,12 @@ export default {
   },
   mounted() {
     this.searchMovies();
+    this.searchSeries();
 
   },
   methods: {
+     // Tramite Axios richiamo l'API dove otterrò l'array netflixMovie
     searchMovies() {
-      // Tramite Axios richiamo l'API dove otterrò l'array netflixMovie
       if (this.textToSearch !== "") {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=${this.textToSearch}&language=it-IT`)
           .then(response => {
@@ -43,8 +44,8 @@ export default {
           })
       }
     },
-    searchAllTvSeries() {
-      // PER LE SERIE TV controllo se è la stringa è vuota cosi printo una pagina inziale
+    // Funzione per generare un Array di serieTv grazie ad Axios
+    searchSeries() {
       if (this.textToSearch !== "") {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=${this.textToSearch}&language=it-IT`)
           .then(response => {
