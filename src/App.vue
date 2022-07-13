@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <myHeader @sendText="query" />
+    <myHeader @searchText="query" />
     <MyMain :netflixMovie="this.netflixMovie" />
   </div>
 </template>
@@ -21,34 +21,45 @@ export default {
     return {
       textToSearch: "",
       netflixMovie: [],
-      getApi: 'https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query=ritorno+al+futuro'
-
+      netflixSeries: [],
+      key: 'f86ac59dbbef3085387cb106cf5cea17'
     }
   },
   mounted() {
     this.searchMovies();
-  
+
   },
   methods: {
-      searchMovies() {
+    searchMovies() {
       // Tramite Axios richiamo l'API dove otterrò l'array netflixMovie
-      axios.get(this.getApi)
-        .then(response => {
-          this.netflixMovie = response.data.results;
-          console.log(this.netflixMovie);
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      if (this.textToSearch !== "") {
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=${this.textToSearch}&language=it-IT`)
+          .then(response => {
+            this.netflixMovie = response.data.results;
+            console.log(this.netflixMovie);
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    },
+    searchAllTvSeries() {
+      // PER LE SERIE TV controllo se è la stringa è vuota cosi printo una pagina inziale
+      if (this.textToSearch !== "") {
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=${this.textToSearch}&language=it-IT`)
+          .then(response => {
+            this.serieArray = response.data.results;
+          })
+      }
     },
     query(text) {
       this.textToSearch = text;
       this.textToSearch = this.textToSearch.replace(" ", "+")
       this.searchMovies();
+      this.searchSeries();
     }
-  }
+  },
 }
-
 </script>
 
 <style lang="scss">
