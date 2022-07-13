@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <myHeader @searchText="query" />
-    <MyMain :netflixMovie="this.netflixMovie" />
+    <MyMain :netflixMovie="this.netflixMovie"  :netflixSeries="this.netflixSeries" />
   </div>
 </template>
 
@@ -28,10 +28,9 @@ export default {
   mounted() {
     this.searchMovies();
     this.searchSeries();
-
   },
   methods: {
-     // Tramite Axios richiamo l'API dove otterrò l'array netflixMovie
+    // Tramite Axios richiamo l'API dove otterrò l'array netflixMovie
     searchMovies() {
       if (this.textToSearch !== "") {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=${this.textToSearch}&language=it-IT`)
@@ -47,9 +46,14 @@ export default {
     // Funzione per generare un Array di serieTv grazie ad Axios
     searchSeries() {
       if (this.textToSearch !== "") {
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=${this.textToSearch}&language=it-IT`)
+        axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.key}&query=${this.textToSearch}&language=it-IT`)
           .then(response => {
-            this.serieArray = response.data.results;
+            this.netflixSeries = response.data.results;
+            console.log(this.netflixSeries);
+
+          })
+          .catch(error => {
+            console.log(error)
           })
       }
     },
