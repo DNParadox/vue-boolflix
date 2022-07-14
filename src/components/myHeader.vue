@@ -31,6 +31,7 @@ export default {
         }
     },
     methods: {
+        // Funzione che permette di poter stampare i vari risultati degli Array (serie e film)
         searchbar() {
             this.$emit('searchText', this.query);
             console.log(this.query);
